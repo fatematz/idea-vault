@@ -1,0 +1,131 @@
+
+
+const IdeaDetails = async ({ params }) => {
+    
+    const { id } = await params;
+    
+    const res = await fetch(`http://localhost:5000/all-ideas`, { cache: 'no-store' });
+    const allIdeas = await res.json();
+    
+    const idea = allIdeas.find(item => item._id?.toString() === id?.toString());
+
+    if (!idea) {
+        return (
+            <div className="text-center py-32 text-slate-500 font-medium text-[20px]">
+                🚀 Idea details not found! <br />
+                <span className="text-sm text-slate-400 font-mono block mt-2">Requested ID: {id}</span>
+            </div>
+        );
+    }
+
+    return (
+        <div className="max-w-[1200px] mx-auto px-6 py-24 mt-10">
+            
+            <div className="mb-16 max-w-2xl">
+                <div className="flex items-center gap-2 text-[18px] font-bold text-slate-800 uppercase tracking-wider mb-3">
+                    <span className="w-5 h-5 bg-[#C6D62E] rounded-full flex items-center justify-center text-slate-950 font-black text-[14px]">+</span>
+                    Innovation Details
+                </div>
+                <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-950 leading-tight">
+                    {idea.title} <br />
+                    <span className="font-serif italic font-normal text-slate-800 text-3xl sm:text-4xl">Deep dive into execution</span>
+                </h2>
+                <div className="border-b border-slate-200 w-full my-6"></div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <div className="lg:col-span-5 relative w-full max-w-[450px] mx-auto lg:mx-0">
+                    <div className="w-full h-[380px] rounded-[2.5rem] overflow-hidden bg-slate-50 border border-slate-100 shadow-sm relative">
+                        {idea.imageUrl ? (
+                            <img 
+                                src={idea.imageUrl} 
+                                alt={idea.title} 
+                                className="w-full h-full object-cover" 
+                            />
+                        ) : (
+                            <div className="w-full h-full bg-slate-100 flex flex-col items-center justify-center text-slate-400">
+                                <span className="text-sm font-semibold uppercase">No Image Available</span>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="absolute -top-6 -right-6 w-28 h-28 bg-[#C6D62E] rounded-3xl shadow-md flex flex-col items-center justify-center p-2 text-center z-10 select-none">
+                        
+                        <span className="text-[16px] font-bold text-slate-900 leading-tight mt-1 capitalize block truncate w-full px-1">
+                            {idea.category || "Idea"}
+                        </span>
+                    </div>
+                </div>
+
+                <div className="lg:col-span-7 space-y-6 bg-white p-2 rounded-2xl">
+                    
+                    <div className="space-y-2">
+                        <p className="text-[20px] font-medium text-slate-800 leading-relaxed italic border-l-4 border-[#C6D62E] pl-3">
+                            {idea.shortDescription}
+                        </p>
+
+                        {idea.budget && (
+                            <p className="text-[22px] font-black text-emerald-700 pt-2">
+                                Estimated Budget: ${Number(idea.budget).toLocaleString()}
+                            </p>
+                        )}
+                    </div>
+
+                    <div className="space-y-6 pt-4 border-t border-slate-100">
+                        <div className="space-y-1">
+                            <h4 className="text-[19px] font-black text-slate-950 uppercase tracking-wide">The Problem:</h4>
+                            <p className="text-slate-600 text-[18px] leading-relaxed whitespace-pre-line">
+                                {idea.problemStatement || "No problem statement provided."}
+                            </p>
+                        </div>
+
+                        <div className="space-y-1">
+                            <h4 className="text-[19px] font-black text-slate-950 uppercase tracking-wide">Proposed Solution:</h4>
+                            <p className="text-slate-600 text-[18px] leading-relaxed whitespace-pre-line">
+                                {idea.proposedSolution || "No solution proposed yet."}
+                            </p>
+                        </div>
+
+                        <div className="space-y-1">
+                            <h4 className="text-[19px] font-black text-slate-950 uppercase tracking-wide">Target Audience:</h4>
+                            <p className="text-slate-600 text-[18px] leading-relaxed">
+                                {idea.targetAudience || "General Public"}
+                            </p>
+                        </div>
+
+                        <div className="space-y-1">
+                            <h4 className="text-[19px] font-black text-slate-950 uppercase tracking-wide">Detailed Breakdown:</h4>
+                            <p className="text-slate-600 text-[18px] leading-relaxed whitespace-pre-line">
+                                {idea.detailedDescription || "No detailed breakdown available."}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100">
+                        {idea.tags && (
+                            <div className="flex flex-wrap gap-2">
+                                {idea.tags.split(',').map((tag, index) => (
+                                    <span 
+                                        key={index} 
+                                        className="text-[16px] font-semibold text-slate-700 bg-slate-100 px-3 py-1 rounded-xl"
+                                    >
+                                        #{tag.trim()}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+
+                        <div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">
+                            <span className="text-xs text-slate-400 font-bold uppercase">Created By:</span>
+                            <span className="text-[16px] font-bold text-slate-800">{idea.userName || "Anonymous"}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default IdeaDetails;
