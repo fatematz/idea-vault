@@ -66,7 +66,7 @@ const onSubmit = async (e) => {
       provider: "google",
     });
   };
-  
+
 
   return (
     <div className="bg-[#C6D62E]/10 min-h-screen flex items-center justify-center px-4">

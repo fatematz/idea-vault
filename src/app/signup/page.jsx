@@ -18,12 +18,12 @@ const signUpPage = () => {
     console.log("user", user)
     const password = user.password;
 
-    const hasMinLength = password.length >= 8;
+    const hasMinLength = password.length >= 6;
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
 
     if (!hasMinLength || !hasUppercase || !hasLowercase) {
-      setPasswordError("Password must be at least 8 characters and include uppercase & lowercase letters.");
+      setPasswordError("Password must be at least 6 characters and include uppercase & lowercase letters.");
       return; 
     }
 
@@ -37,7 +37,7 @@ const signUpPage = () => {
     if (error) {
       toast.error(error.message || "Something went wrong! Please try again.");
     } else if (data) {
-      toast.success("Account created successfully! 🎉");
+      toast.success("Account created successfully! ");
       e.target.reset(); 
       setPasswordError("");
       
@@ -50,14 +50,14 @@ const signUpPage = () => {
   const handlePasswordChange = (e) => {
     const password = e.target.value;
 
-    const hasMinLength = password.length >= 8;
+    const hasMinLength = password.length >= 6;
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
 
     if (password === "") {
       setPasswordError("");
     } else if (!hasMinLength || !hasUppercase || !hasLowercase) {
-      setPasswordError("Password must be at least 8 characters and include uppercase & lowercase letters.");
+      setPasswordError("Password must be at least 6 characters and include uppercase & lowercase letters.");
     } else {
       setPasswordError("");
     }
