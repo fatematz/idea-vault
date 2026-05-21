@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import { DeleteCommentModal } from "./DeleteCommentModal";
 import { EditCommentModal } from "./EditComment"; 
 import { authClient } from "@/lib/auth-client";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const CommentsSection = ({ ideaId, initialComments = [] }) => {
   const [comments, setComments] = useState(initialComments);
@@ -11,18 +14,27 @@ const CommentsSection = ({ ideaId, initialComments = [] }) => {
   const { data: session } = authClient.useSession();
 
   const handleDeleteComment = async (id) => {
+
+
+            const {data: tokenData} = await authClient.token()
+            console.log("tokenData", tokenData)
+
     try {
       const res = await fetch(`http://localhost:5000/comments/${id}`, {
+        headers: {
+          authorization: `Bearer ${tokenData.token}`
+        },
         method: "DELETE",
       });
 
       if (res.ok) {
         setComments(comments.filter((comment) => comment._id !== id));
+        toast.success("Comment deleted successfully!");
       } else {
-        console.error("Failed to delete comment from database");
+        toast.error("Failed to delete the comment!");
       }
     } catch (error) {
-      console.error("Error sending DELETE request:", error);
+      toast.error("Server error occurred!");
     }
   };
 
@@ -40,11 +52,12 @@ const CommentsSection = ({ ideaId, initialComments = [] }) => {
             comment._id === id ? { ...comment, text: newText } : comment
           )
         );
+        toast.success("Your comment has been posted successfully!");
       } else {
-        console.error("Failed to update comment in database");
+       toast.error("Failed to post the comment!");
       }
     } catch (error) {
-      console.error("Error sending PATCH request:", error);
+      toast.error("Failed to post the comment!");
     }
   };
 
@@ -65,10 +78,16 @@ const CommentsSection = ({ ideaId, initialComments = [] }) => {
       createdAt: new Date().toISOString(),
     };
 
+
+    const {data: tokenData} = await authClient.token()
+    console.log("tokenData", tokenData)
+
     try {
       const res = await fetch(`http://localhost:5000/my-interactions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", 
+          authorization: `Bearer ${tokenData?.token}`
+         },
         body: JSON.stringify(fullCommentData),
       });
 
@@ -84,6 +103,7 @@ const CommentsSection = ({ ideaId, initialComments = [] }) => {
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 mt-12">
+     <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
       <div className="bg-white border border-slate-200/60 rounded-2xl p-6 shadow-sm">
         <h3 className="text-xl font-bold text-slate-950 mb-6">
           Comments ({comments.length})

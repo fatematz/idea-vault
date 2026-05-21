@@ -1,9 +1,53 @@
+
+
+import { DeleteIdeaModal } from "@/components/DeleteIdeaModal";
+import { EditIdeaModal } from "@/components/EditIdeaModal";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+
+
+
 const myIdeaPage = async () => {
-  const res = await fetch("http://localhost:5000/myidea");
+
+    const session = await auth.api.getSession({
+    headers: await headers()
+  });
+
+  // const token = session?.token;
+
+
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
+
+  console.log(token)
+
+
+
+  const email = session?.user?.email;
+
+  if (!email) {
+    return (
+      <div className="max-w-[1300px] mx-auto px-6 py-16 mt-20 text-center text-red-500 font-bold text-xl">
+        Please log in to view your ideas.
+      </div>
+    );
+  }
+
+
+  const res = await fetch(`http://localhost:5000/myidea?email=${email}`,  {
+     headers: {
+      authorization: `Bearer ${token}`
+     }
+    
+  });
+  
   const myIdea = await res.json();
+  console.log("My Idea Data:", myIdea);
+
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 py-16 mt-20">
+    <div className="max-w-[1300px]  mx-auto px-6 py-16 mt-20">
       <div className="mb-16 max-w-2xl">
         <div className="flex items-center gap-2 text-[18px] font-bold text-slate-800 uppercase tracking-wider mb-3">
           <span className="w-5 h-5 bg-[#C6D62E] rounded-full flex items-center justify-center text-slate-950 font-black text-[14px]">
@@ -20,11 +64,11 @@ const myIdeaPage = async () => {
         </p>
       </div>
 
-      <div className="space-y-24">
+      <div className="space-y-24 ">
         {myIdea.map((idea) => (
           <div
             key={idea._id}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center "
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center border rounded-2xl bg-gray-50 p-15 "
           >
             <div className="lg:col-span-5 relative w-full max-w-[450px] mx-auto lg:mx-0">
               {idea.imageUrl && (
@@ -40,7 +84,7 @@ const myIdeaPage = async () => {
                 <span className="text-[18px] font-bold !text-slate-900 leading-tight mt-1 capitalize block truncate w-full px-1">
                   {idea.category || ""}
                 </span>
-              </div>{" "}
+              </div>
             </div>
 
             <div className="lg:col-span-7 space-y-6">
@@ -51,7 +95,7 @@ const myIdeaPage = async () => {
                 </h3>
 
                 <p className="text-[20px] font-medium text-slate-800 leading-relaxed italic border-l-4 border-[#C6D62E] pl-3">
-                  "{idea.shortDescription}"
+                  {idea.shortDescription}
                 </p>
 
                 {idea.budget && (
@@ -112,6 +156,11 @@ const myIdeaPage = async () => {
                     ))}
                   </div>
                 )}
+
+                <div className="flex justify-center gap-2">
+                <EditIdeaModal idea={idea} />
+                 <DeleteIdeaModal ideaId={idea._id} />
+                 </div>
 
                 
               </div>
