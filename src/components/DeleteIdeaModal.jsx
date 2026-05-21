@@ -12,7 +12,7 @@ export function DeleteIdeaModal({ ideaId }) {
     console.log("tokenData", tokenData);
 
     try {
-      const res = await fetch(`http://localhost:5000/ideas/${ideaId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas/${ideaId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${tokenData.token}`,

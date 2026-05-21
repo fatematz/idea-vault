@@ -35,7 +35,7 @@ const myIdeaPage = async () => {
   }
 
 
-  const res = await fetch(`http://localhost:5000/myidea?email=${email}`,  {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/myidea?email=${email}`,  {
      headers: {
       authorization: `Bearer ${token}`
      }

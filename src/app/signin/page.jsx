@@ -5,48 +5,68 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 
 const signInPage = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  //   const formData = new FormData(e.currentTarget);
+  //   const user = Object.fromEntries(formData.entries());
 
-    const fromData = new FormData(e.currentTarget);
-    const user = Object.fromEntries(fromData.entries());
+  //   const { data, error } = await authClient.signIn.email({
+  //     email: user.email,
+  //     password: user.password,
+  //   });
 
-    console.log("user", user)
+  //   if (error) {
+  //     toast.error(error.message || "Invalid email or password!");
+  //     return;
+  //   }
 
-    const { data, error } = await authClient.signIn.email({
-      email: user.email,
-      password: user.password,
-    });
+  //   if (data) {
+  //     toast.success("Welcome back!");
+  //     e.currentTarget.reset();
 
-    console.log("fff", data, error)
-
-    if (error) {
-      toast.error(error.message || "Invalid email or password!");
-    } else if (data) {
-      toast.success("Welcome back!");
-      e.target.reset();
-
-      setTimeout(() => {
-        router.push(callbackUrl);
-      });
-    }
-  };
+  //     setTimeout(() => {
+  //       router.push("/"); 
+  //     });
+  //   }
+  // };
 
 
-  const handleGoogleSignin = async() => {
-     const data = await authClient.signIn.social({
-    provider: "google",
-    })
+const onSubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.currentTarget);
+  const user = Object.fromEntries(formData.entries());
+
+  const { error } = await authClient.signIn.email({
+    email: user.email,
+    password: user.password,
+  });
+
+  if (error) {
+    toast.error(error.message || "Invalid email or password!");
+    return;
   }
+
+  toast.success("Welcome back!");
+  
+  setTimeout(() => {
+    window.location.href = "/";
+  }, 500);
+};
+
+  const handleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+  
 
   return (
     <div className="bg-[#C6D62E]/10 min-h-screen flex items-center justify-center px-4">
@@ -123,22 +143,18 @@ const signInPage = () => {
               >
                 Sign in
               </button>
-           </form>
+            </form>
 
-            <button onClick={handleGoogleSignin}
-                type="submit"
-                className="w-full bg-white hover:bg-[#b5c527] text-slate-900 font-semibold py-3 rounded-lg transition-colors shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-[#C6D62E] focus:ring-offset-2 cursor-pointer"
-              >
-                <div className="flex justify-center items-center gap-2">
-                <div className="">
-                    <FcGoogle size={18} />
-                </div>
-                <div className="">
-                    Sign in with google
-                </div>
-            </div>
-              </button>
-           
+            <button
+              onClick={handleGoogleSignin}
+              type="button"
+              className="w-full bg-white hover:bg-[#b5c527] text-slate-900 font-semibold py-3 rounded-lg transition-colors shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-[#C6D62E] focus:ring-offset-2 cursor-pointer"
+            >
+              <div className="flex justify-center items-center gap-2">
+                <FcGoogle size={18} />
+                <div>Sign in with google</div>
+              </div>
+            </button>
 
             <p className="text-center text-sm text-slate-600 pt-2">
               Don't have an account?

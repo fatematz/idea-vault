@@ -19,7 +19,7 @@ const IdeasPage = () => {
         const fetchIdeas = async () => {
             try {
                 const emailQuery = session?.user?.email ? `?email=${session.user.email}` : '';
-                const res = await fetch(`http://localhost:5000/all-ideas${emailQuery}`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-ideas${emailQuery}`);
                 const data = await res.json();
                 setAllIdeas(data);
             } catch (error) {

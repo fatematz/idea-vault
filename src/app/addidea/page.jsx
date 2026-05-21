@@ -54,7 +54,7 @@ const AddIdea =() => {
         console.log("tokenData", tokenData)
 
     try {
-      const res = await fetch('http://localhost:5000/addidea', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/addidea`, {
         method: "POST",
         headers: {
           'content-type': 'application/json',

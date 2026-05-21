@@ -20,7 +20,7 @@ const CommentsSection = ({ ideaId, initialComments = [] }) => {
             console.log("tokenData", tokenData)
 
     try {
-      const res = await fetch(`http://localhost:5000/comments/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${id}`, {
         headers: {
           authorization: `Bearer ${tokenData.token}`
         },
@@ -40,7 +40,7 @@ const CommentsSection = ({ ideaId, initialComments = [] }) => {
 
   const handleEditComment = async (id, newText) => {
     try {
-      const res = await fetch(`http://localhost:5000/comments/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: newText }),
@@ -83,7 +83,7 @@ const CommentsSection = ({ ideaId, initialComments = [] }) => {
     console.log("tokenData", tokenData)
 
     try {
-      const res = await fetch(`http://localhost:5000/my-interactions`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-interactions`, {
         method: "POST",
         headers: { "Content-Type": "application/json", 
           authorization: `Bearer ${tokenData?.token}`

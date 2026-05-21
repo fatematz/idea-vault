@@ -25,7 +25,7 @@ const IdeaDetails = async ({ params }) => {
   const userEmail = session?.user?.email;
 
   const res = await fetch(
-    `http://localhost:5000/all-ideas?email=${userEmail}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/all-ideas?email=${userEmail}`,
     {
       headers: {
         'Authorization': actualToken ? `Bearer ${actualToken}` : '',
@@ -70,7 +70,7 @@ const IdeaDetails = async ({ params }) => {
 
   let fetchedComments = [];
   try {
-    const commentsRes = await fetch(`http://localhost:5000/comments/${id}`, {
+    const commentsRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${id}`, {
       cache: "no-store",
     });
     if (commentsRes.ok) {
