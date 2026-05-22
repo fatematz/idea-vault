@@ -37,7 +37,8 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-[150px] p-8 bg-white dark:bg-slate-900 rounded-3xl shadow-lg border border-gray-100 dark:border-slate-800 transition-all">
+    <div className="pt-30">
+    <div className="max-w-md mx-auto  p-8 bg-white dark:bg-slate-900 rounded-3xl shadow-lg border border-gray-100 dark:border-slate-800 transition-all">
       <ToastContainer position="top-right" autoClose={3000} theme="colored" />
       
       <h2 className="text-2xl font-bold mb-8 text-slate-800 dark:text-white text-center">
@@ -71,6 +72,7 @@ const UpdateProfile = () => {
           {loading ? "Saving..." : "Save Changes"}
         </Button>
       </div>
+    </div>
     </div>
   );
 };

@@ -1,56 +1,43 @@
-
-
 const NewIdeasPage = () => {
   return (
-    <section style={{ backgroundColor: '#ffffff', padding: '80px 20px' }}>
-      <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
-        
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <span style={{ 
-            display: 'inline-block', 
-            backgroundColor: '#C6D62E', 
-            color: '#000000', 
-            padding: '4px 16px', 
-            borderRadius: '20px', 
-            fontWeight: 'bold', 
-            fontSize: '12px', 
-            textTransform: 'uppercase', 
-            letterSpacing: '2px', 
-            marginBottom: '24px' 
-          }}>
+    <section className="bg-white dark:bg-slate-950 py-10 md:py-20 px-5">
+      <div className="max-w-[1300px] mx-auto">
+
+        <div className="text-center mb-4">
+          <span className="inline-block bg-[#C6D62E] text-black px-4 py-1 rounded-full font-bold text-xs uppercase tracking-widest mb-6">
             Testimonial
           </span>
-          <h2 style={{ fontSize: '48px', fontWeight: '800', color: '#000000', lineHeight: '1.1', marginBottom: '16px' }}>
-            WHAT OUR CLIENTS THINK<br /> 
-            <span style={{ color: '#9ca3af' }}>ABOUT OUR SERVICES.</span>
+          <h2 className="text-3xl font-extrabold text-black dark:text-white leading-tight mb-10 md:mb-20">
+            WHAT OUR CLIENTS THINK<br />
+            <span className="text-[#C6D62E]">ABOUT OUR SERVICES.</span>
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-          
-          <div style={{ backgroundColor: '#C6D62E', padding: '40px', borderRadius: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <h3 style={{ fontSize: '12px', fontWeight: 'bold', color: '#000000', opacity: '0.7', marginBottom: '24px' }}>CUSTOMER STORIES</h3>
-            <p style={{ fontSize: '28px', fontWeight: 'bold', color: '#000000', marginBottom: '32px' }}>"I use IdeaVault to help me succeed"</p>
-            <p style={{ fontWeight: '600', color: '#000000' }}>— Adam Smith</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+          <div className="bg-[#C6D62E] p-10 rounded-3xl flex flex-col justify-between">
+            <h3 className="text-xs font-bold text-black opacity-70 mb-6 uppercase tracking-wider">Customer Stories</h3>
+            <p className="text-[28px] font-bold text-black mb-8">"I use IdeaVault to help me succeed"</p>
+            <p className="font-semibold text-black">— Adam Smith</p>
           </div>
 
-          <div style={{ backgroundColor: '#C6D62E', padding: '40px', borderRadius: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <h3 style={{ fontSize: '12px', fontWeight: 'bold', color: '#000000', opacity: '0.7', marginBottom: '24px' }}>FACTS & NUMBERS</h3>
-            <div style={{ fontSize: '64px', fontWeight: '900', color: '#000000', marginBottom: '8px' }}>89.5%</div>
-            <p style={{ fontSize: '18px', fontWeight: 'bold', color: '#000000' }}>OF CUSTOMERS RECOMMEND SERVICES</p>
+          <div className="bg-[#C6D62E] p-10 rounded-3xl flex flex-col justify-between">
+            <h3 className="text-xs font-bold text-black opacity-70 mb-6 uppercase tracking-wider">Facts & Numbers</h3>
+            <div className="text-[64px] font-black text-black mb-2">89.5%</div>
+            <p className="text-lg font-bold text-black">OF CUSTOMERS RECOMMEND SERVICES</p>
           </div>
 
-          <div style={{ backgroundColor: '#f9fafb', border: '1px solid #e5e7eb', padding: '40px', borderRadius: '24px' }}>
-            <h3 style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', marginBottom: '24px' }}>CUSTOMER STORIES →</h3>
-            <p style={{ color: '#374151', marginTop: '60px' }}>Transforming Business Growth: How Just Dabao foe Strategic Investment.</p>
+          <div className="bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 p-10 rounded-3xl">
+            <h3 className="text-xs font-bold text-gray-500 dark:text-slate-400 mb-6 uppercase tracking-wider">Customer Stories →</h3>
+            <p className="text-gray-700 dark:text-slate-300 mt-16">Transforming Business Growth: How Just Dabao foe Strategic Investment.</p>
           </div>
 
-          <div style={{ backgroundColor: '#f3f4f6', padding: '40px', borderRadius: '24px', border: '1px solid #e5e7eb' }}>
-            <h3 style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', marginBottom: '24px' }}>REVIEW</h3>
-            <p style={{ fontSize: '20px', color: '#1f2937', lineHeight: '1.6', marginBottom: '24px' }}>
+          <div className="bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-10 rounded-3xl">
+            <h3 className="text-xs font-bold text-gray-500 dark:text-slate-400 mb-6 uppercase tracking-wider">Review</h3>
+            <p className="text-[20px] text-gray-800 dark:text-slate-200 leading-relaxed mb-6">
               "We couldn't believe the difference IdeaVault made in our day-to-day operations. It's a game-changer!"
             </p>
-            <p style={{ color: '#000000', fontWeight: 'bold' }}>Alex Heals, CEO of Interfacts</p>
+            <p className="text-black dark:text-white font-bold">Alex Heals, CEO of Interfacts</p>
           </div>
 
         </div>

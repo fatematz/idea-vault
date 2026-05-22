@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import banner1 from "@/assets/banner.png";
 import banner2 from "@/assets/banner2.png";
 import banner3 from "@/assets/banner3.png";
+import Link from "next/link";
 
 const slides = [
   {
@@ -64,9 +65,9 @@ const Banner = () => {
         <p className="mt-4 text-lg md:text-xl text-white/80 max-w-xl">
           {slides[current].sub}
         </p>
-        <button className="mt-8 px-8 py-4 bg-[#C6D62E] text-black font-bold text-lg rounded-full hover:scale-105 transition-transform shadow-lg">
+        <Link href="/ideas" className="mt-8 px-8 py-4 bg-[#C6D62E] text-black font-bold text-lg rounded-full hover:scale-105 transition-transform shadow-lg">
           Explore Ideas →
-        </button>
+        </Link>
       </div>
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-3">

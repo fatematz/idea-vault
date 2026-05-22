@@ -57,12 +57,12 @@ const filteredIdeas = Array.isArray(allIdeas)
         : [];
 
     return (
-        <div className="bg-slate-50/50 min-h-screen pt-28 pb-20">
+        <div className="bg-slate-50/50 dark:bg-slate-950 min-h-screen pt-28 pb-20">
             <div className="max-w-[1450px] mx-auto px-6">
                 
                 <div className="mb-8">
-                    <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-                        Browse Ideas
+                    <h1 className="text-[25px] font-extrabold text-slate-900 dark:text-white tracking-tight">
+                        Browse <span className='text-[#C6D62E]'>Ideas</span> 
                     </h1>
                 </div>
 
@@ -78,7 +78,7 @@ const filteredIdeas = Array.isArray(allIdeas)
                             placeholder="Search ideas..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#C6D62E]/30 focus:border-[#C6D62E] transition-all text-slate-800 shadow-sm"
+                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-[#C6D62E]/30 focus:border-[#C6D62E] transition-all text-slate-800 dark:text-white shadow-sm"
                         />
                     </div>
 
@@ -86,7 +86,7 @@ const filteredIdeas = Array.isArray(allIdeas)
                         <button
                             type="button"
                             onClick={() => setOpenDropdown(!openDropdown)}
-                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C6D62E]/30 focus:border-[#C6D62E] hover:border-[#C6D62E] text-slate-700 font-medium shadow-sm flex justify-between items-center transition-all cursor-pointer text-base"
+                            className="w-full px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#C6D62E]/30 focus:border-[#C6D62E] hover:border-[#C6D62E] text-slate-700 dark:text-slate-200 font-medium shadow-sm flex justify-between items-center transition-all cursor-pointer text-base"
                         >
                             <span className="truncate">{selectedCategory}</span>
                             <svg className={`w-4 h-4 text-slate-400 transition-transform ml-2 flex-shrink-0 ${openDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -95,7 +95,7 @@ const filteredIdeas = Array.isArray(allIdeas)
                         </button>
 
                         {openDropdown && (
-                            <div className="absolute z-20 mt-2 w-full bg-white border border-slate-100 rounded-xl shadow-lg max-h-60 overflow-y-auto py-1.5 left-0">
+                            <div className="absolute z-20 mt-2 w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-xl shadow-lg max-h-60 overflow-y-auto py-1.5 left-0">
                                 {categories.map((cat, idx) => (
                                     <button
                                         key={idx}
@@ -104,7 +104,7 @@ const filteredIdeas = Array.isArray(allIdeas)
                                             setSelectedCategory(cat);
                                             setOpenDropdown(false);
                                         }}
-                                        className="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-[#C6D62E] hover:text-slate-950 transition-colors font-medium"
+                                        className="w-full text-left px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-[#C6D62E] hover:text-slate-950 transition-colors font-medium"
                                     >
                                         {cat}
                                     </button>
@@ -115,15 +115,15 @@ const filteredIdeas = Array.isArray(allIdeas)
                 </div>
 
                 {loading ? (
-                    <div className="text-center py-20 text-slate-500 font-medium">Loading innovative ideas...</div>
+                    <div ></div>
                 ) : (
                     <>
                         {filteredIdeas.length === 0 ? (
-                            <div className="text-center py-20 bg-white rounded-2xl border border-dashed border-slate-200 p-8">
-                                <p className="text-slate-500 text-[18px] font-medium">No ideas found matching your criteria.</p>
+                            <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-200 dark:border-slate-700 p-8">
+                                <p className="text-slate-500 dark:text-slate-400 text-[18px] font-medium">No ideas found matching your criteria.</p>
                                 <button 
                                     onClick={() => { setSearchQuery(''); setSelectedCategory('All Categories'); }}
-                                    className="mt-4 text-sm font-semibold text-slate-700 hover:text-slate-900 underline decoration-[#C6D62E] underline-offset-4"
+                                    className="mt-4 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 underline decoration-[#C6D62E] underline-offset-4"
                                 >
                                     Reset all filters
                                 </button>
@@ -133,7 +133,7 @@ const filteredIdeas = Array.isArray(allIdeas)
                                 {filteredIdeas.map((idea) => (
                                     <div 
                                         key={idea._id} 
-                                        className="bg-white border border-slate-200/60 rounded-2xl p-5 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200"
+                                        className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-700 rounded-2xl p-5 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200"
                                     >
                                         <div className="space-y-4">
                                             <div className="w-full h-52 rounded-xl overflow-hidden relative bg-slate-50 border border-slate-100">
@@ -148,22 +148,22 @@ const filteredIdeas = Array.isArray(allIdeas)
                                             </div>
 
                                             <div className="space-y-2">
-                                                <h3 className="text-[20px] font-bold text-slate-950 line-clamp-2 min-h-[56px]">
+                                                <h3 className="text-[20px] font-bold text-slate-950 dark:text-white line-clamp-2 min-h-[56px]">
                                                     {idea.title}
                                                 </h3>
-                                                <p className="text-slate-600 text-[16px] line-clamp-2 min-h-[48px]">
+                                                <p className="text-slate-600 dark:text-slate-400 text-[16px] line-clamp-2 min-h-[48px]">
                                                     {idea.shortDescription}
                                                 </p>
                                             </div>
 
                                             {idea.budget && (
-                                                <p className="text-[16px] font-bold text-emerald-700">
+                                                <p className="text-[16px] font-bold text-emerald-700 dark:text-emerald-400">
                                                     Budget: ${Number(idea.budget).toLocaleString()}
                                                 </p>
                                             )}
                                         </div>
 
-                                        <div className="mt-6 pt-4 border-t border-slate-100">
+                                        <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700">
                                             <Link 
                                                 href={`/ideas/${idea._id}`}
                                                 className="w-full bg-[#C6D62E] hover:bg-[#b5c527] text-slate-950 text-center font-bold text-sm py-3 rounded-xl block transition-colors shadow-sm"
