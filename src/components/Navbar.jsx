@@ -8,6 +8,8 @@ import { useTheme } from "next-themes";
 import logo from "@/assets/logo3.png";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@heroui/react";
+import { BsSun, BsMoon } from "react-icons/bs";
+import { RiMenu3Line } from "react-icons/ri";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -46,7 +48,7 @@ const Navbar = () => {
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-yellow-400 transition-all"
     >
-      {theme === 'dark' ? '☀️' : '🌙'}
+      {theme === 'dark' ? <BsSun size={18} /> : <BsMoon size={18} />}
     </button>
   );
 
@@ -55,7 +57,7 @@ const Navbar = () => {
       <div className="max-w-[1450px] mx-auto bg-white dark:bg-slate-900 rounded-full border border-gray-200 dark:border-slate-800 shadow-sm h-14 flex items-center px-4 justify-between gap-4 transition-colors">
         
         <div className="flex items-center gap-2 shrink-0">
-          <Image src={logo} alt="logo" width={45} className="w-9 h-9" />
+          <Image src={logo} alt="logo" width={45} className="w-9 h-9 invert-0 dark:invert" />
           <h2 className="font-bold text-slate-800 dark:text-white m-0 text-lg">
             <span className="text-[#C6D62E]">Idea</span>Vault
           </h2>
@@ -88,17 +90,15 @@ const Navbar = () => {
               )}
             </div>
           ) : (
-     
             <div className="flex gap-3">
-            <Link href="/signin" className="bg-[#C6D62E] px-5 py-2 rounded-full font-semibold">Sign In</Link>
-            
-            <Link href="/signup" className="bg-[#C6D62E] px-5 py-2 rounded-full font-semibold">Sign Up</Link>
+              <Link href="/signin" className="bg-[#C6D62E] px-5 py-2 rounded-full font-semibold">Sign In</Link>
+              <Link href="/signup" className="bg-[#C6D62E] px-5 py-2 rounded-full font-semibold">Sign Up</Link>
             </div>
           )}
         </div>
 
-        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 rounded-full bg-slate-100 dark:bg-slate-800">
-          ☰
+        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 rounded-full bg-slate-100 dark:bg-slate-800 dark:text-white">
+          <RiMenu3Line size={18} />
         </button>
       </div>
 

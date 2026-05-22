@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "IdeaVault | Home",
+};
+
 import Banner from "@/components/Banner";
 import HowItWorks from "@/components/HowItWorks";
 import NewIdeasPage from "@/components/NewIdeasPage";

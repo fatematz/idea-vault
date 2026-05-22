@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const CommentsSection = ({ ideaId, initialComments = [] }) => {
+const CommentsSection = ({ ideaId, initialComments = [] , ideaTitle  }) => {
   const [comments, setComments] = useState(initialComments);
   const [newComment, setNewComment] = useState("");
   const { data: session } = authClient.useSession();
@@ -55,14 +55,15 @@ const CommentsSection = ({ ideaId, initialComments = [] }) => {
     const rawData = Object.fromEntries(formData.entries());
     if (!rawData.text?.trim()) return;
 
-    const fullCommentData = {
-      ideaId: ideaId,
-      text: rawData.text,
-      userName: session?.user?.name || "Anonymous",
-      userImage: session?.user?.image || "https://i.ibb.co.com/vxFH4vN/avatar.png",
-      userEmail: session?.user?.email,
-      createdAt: new Date().toISOString(),
-    };
+const fullCommentData = {
+  ideaId: ideaId,
+  ideaTitle: ideaTitle, // ← add koro
+  text: rawData.text,
+  userName: session?.user?.name || "Anonymous",
+  userImage: session?.user?.image || "https://i.ibb.co.com/vxFH4vN/avatar.png",
+  userEmail: session?.user?.email,
+  createdAt: new Date().toISOString(),
+};
 
     const {data: tokenData} = await authClient.token()
     try {
@@ -75,6 +76,7 @@ const CommentsSection = ({ ideaId, initialComments = [] }) => {
         const savedComment = await res.json();
         setComments([...comments, savedComment]);
         setNewComment("");
+        toast.success("Comment posted successfully!"); 
       }
     } catch (error) {
       console.error("Error posting comment to backend:", error);
