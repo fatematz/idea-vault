@@ -19,7 +19,7 @@ const IdeasPage = () => {
         const fetchIdeas = async () => {
             try {
                 const emailQuery = session?.user?.email ? `?email=${session.user.email}` : '';
-                const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-ideas${emailQuery}`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-ideas?search=${searchQuery}`);
                 const data = await res.json();
                 setAllIdeas(data);
             } catch (error) {
@@ -30,7 +30,7 @@ const IdeasPage = () => {
         };
 
         fetchIdeas();
-    }, [session]); // 
+    }, [session, searchQuery]); // 
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -42,19 +42,12 @@ const IdeasPage = () => {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-const filteredIdeas = Array.isArray(allIdeas) 
-        ? allIdeas.filter((idea) => {
-            const matchesCategory = 
-                selectedCategory === 'All Categories' || 
-                idea.category?.toLowerCase() === selectedCategory.toLowerCase();
-
-            const matchesSearch = 
-                idea.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                idea.category?.toLowerCase().includes(searchQuery.toLowerCase());
-
-            return matchesCategory && matchesSearch;
-          })
-        : [];
+const filteredIdeas = Array.isArray(allIdeas)
+    ? allIdeas.filter((idea) => {
+        return selectedCategory === 'All Categories' ||
+            idea.category?.toLowerCase() === selectedCategory.toLowerCase();
+    })
+    : [];
 
     return (
         <div className="bg-slate-50/50 dark:bg-slate-950 min-h-screen pt-28 pb-20">
