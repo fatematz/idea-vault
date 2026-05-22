@@ -1,3 +1,5 @@
+
+
 # IdeaVault 💡
 
 A platform where visionaries share innovative ideas, get community feedback, and connect with investors.
@@ -8,22 +10,24 @@ A platform where visionaries share innovative ideas, get community feedback, and
 
 ## Screenshots
 
-> Homepage with trending ideas, how it works section, and testimonials.
+
+<img width="1909" height="909" alt="image" src="https://github.com/user-attachments/assets/b0f40ee8-b571-47bc-becf-7dbf2ba81494" />
+
 
 ---
 
 ## Features
 
-- 🔐 Email & Google OAuth sign in (Better Auth)
-- 💡 Browse all ideas with search & category filter
-- 📄 Paginated idea listing (6 per page)
-- 🔥 Trending ideas section on homepage
-- ➕ Submit your own idea with image, budget, tags & more
-- ✏️ Edit and delete your own ideas
-- 💬 Comment on ideas
-- 📋 View your comment history in My Interactions
-- 👤 User profile page
-- 📱 Fully responsive design
+-  Email & Google OAuth sign in (Better Auth)
+-  Browse all ideas with search & category filter
+-  Paginated idea listing (6 per page)
+-  Trending ideas section on homepage
+-  Submit your own idea with image, budget, tags & more
+-  Edit and delete your own ideas
+-  Comment on ideas
+-  View your comment history in My Interactions
+-  User profile page
+-  Fully responsive design
 
 ## Pages
 
